@@ -1,5 +1,4 @@
 'use strict';
-// Player factory.
 const playerFactory = function (name, symbol) {
   return {
     name,
@@ -7,22 +6,18 @@ const playerFactory = function (name, symbol) {
   };
 };
 
-// Create players.
-const player1 = new playerFactory('Player 1', 'X', true);
-const player2 = new playerFactory('Player 2', 'O', false);
+const player1 = new playerFactory('Player 1', 'X');
+const player2 = new playerFactory('Player 2', 'O');
 
-// Gameboard module.
 const Gameboard = (function () {
   let _boardArr = new Array(9).fill('');
   let _cells = Array.from(document.querySelectorAll('.cell'));
   let _turnCount = 1;
   let _winner = undefined;
 
+  // Restart variables related to functionality and cell elements.
   function _restartGame() {
-    // Select btn.
     const restartBtn = document.querySelector('.restart');
-
-    // Attach eventListener and restart variables.
     restartBtn.addEventListener('click', function () {
       _boardArr.fill('');
       _turnCount = 1;
@@ -33,6 +28,7 @@ const Gameboard = (function () {
     });
   }
 
+  // Depending on _turnCount, return player.symbol
   function _checkTurn() {
     if (_turnCount % 2 === 1) {
       _turnCount++;
@@ -43,6 +39,8 @@ const Gameboard = (function () {
     }
   }
 
+  // Check if there is a winner, add symbol to board and
+  // add corresponding element to _boardArr
   function _addSymbol() {
     _cells.forEach((cell) => {
       cell.addEventListener('click', function (e) {
@@ -54,14 +52,14 @@ const Gameboard = (function () {
             _boardArr.splice(cellIdx, 1, cell.textContent);
           }
         }
-        console.log(_turnCount);
       });
     });
   }
 
+  // Start to check after _turnCount > 5, check for winning conditions
+  // and return winner.
   function _checkWinner() {
-    if (_turnCount >= 5) {
-      console.log('Start counting');
+    if (_turnCount > 5) {
       const winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
