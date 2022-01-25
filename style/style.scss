@@ -55,4 +55,11 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5%;
+
+  .player {
+    display: inherit;
+    flex-direction: column;
+    gap: 1em;
+  }
 }
