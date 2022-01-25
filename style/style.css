@@ -1,4 +1,78 @@
 * {
-  background-color: red;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  margin-top: 2%;
+}
+
+header h1 {
+  font-family: 'Merienda One', cursive;
+  font-size: 64px;
+}
+
+header h4 {
+  font-family: 'Sedgwick Ave', cursive;
+  text-align: end;
+  font-size: 2em;
+  color: white;
+  background-color: black;
+  width: 53%;
+  padding-right: 15%;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 5%;
+}
+
+.gameboard {
+  width: 20vw;
+  height: 35vh;
+  display: -ms-grid;
+  display: grid;
+  grid: repeat(3, 1fr)/repeat(3, 1fr);
+  gap: 10px;
+  border-radius: 10%;
+}
+
+.cell {
+  background-color: rgba(80, 134, 155, 0.822);
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 10%;
+  font-family: 'Sedgwick Ave', cursive;
+  font-size: 3em;
+}
+
+.info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=style.css.map */
