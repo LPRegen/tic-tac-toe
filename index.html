@@ -14,9 +14,27 @@
     <title>Tic Tac Toe!</title>
   </head>
   <body>
+    <div class="modal-bg">
+      <div class="modal">
+        <span class="close-modal">X</span>
+        <h2 id="modal-message">Player 1 has won this game!</h2>
+        <button class="restart">Play again!</button>
+      </div>
+    </div>
     <header>
       <h1>Tic Tac Toe</h1>
-      <h4>O X O</h4>
+      <div class="left-bar">
+        <h4>O X O</h4>
+      </div>
+      <div class="github">
+        <a
+          href="https://github.com/LPRegen"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img src="./icons/icons8-github.svg" alt="Github icon" />LPRegen's
+          Github</a
+        >
+      </div>
     </header>
     <section class="container">
       <div class="gameboard">
@@ -33,25 +51,32 @@
     </section>
     <section class="info">
       <div class="player">
+        <div class="player-name" id="display-player-1">Player 1</div>
         <input
+          maxlength="9"
           type="text"
           name="player1"
           id="player-1"
           placeholder="Name for Player 1"
         />
-        <button id="submit-player1">Change name</button>
+        <button class="submit-name" id="submit-player1">Change name</button>
       </div>
       <button class="restart">Restart</button>
       <div class="player">
+        <div class="player-name" id="display-player-2">Player 2</div>
         <input
+          maxlength="9"
           type="text"
           name="player2"
           id="player-2"
           placeholder="Name for Player 2"
         />
-        <button id="submit-player2">Change name</button>
+        <button class="submit-name" id="submit-player2">Change name</button>
       </div>
     </section>
+    <footer>
+      <div class="right-bar"></div>
+    </footer>
     <script src="./main.js"></script>
   </body>
 </html>
