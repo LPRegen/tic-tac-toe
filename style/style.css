@@ -4,26 +4,13 @@
 }
 
 header {
+  display: -ms-grid;
+  display: grid;
+  grid: 4fr 1fr/repeat(3, 1fr);
   text-align: center;
-  margin-top: 2%;
 }
 
 header h1 {
-  font-family: 'Merienda One', cursive;
-  font-size: 64px;
-}
-
-header h4 {
-  font-family: 'Sedgwick Ave', cursive;
-  text-align: end;
-  font-size: 2em;
-  color: white;
-  background-color: black;
-  width: 53%;
-  padding-right: 15%;
-}
-
-.container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,10 +20,89 @@ header h4 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 5%;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  font-family: 'Merienda One', cursive;
+  overflow: visible;
+  white-space: nowrap;
+  font-size: 64px;
+  letter-spacing: 0.1em;
 }
 
-.gameboard {
+header .left-bar {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 0 10px 10px 0;
+}
+
+header .left-bar h4 {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  font-family: 'Sedgwick Ave', cursive;
+  font-size: 2em;
+  color: white;
+  width: 100%;
+  padding-top: 1%;
+}
+
+.github {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/3;
+}
+
+.github img {
+  margin-top: 8%;
+}
+
+a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-decoration: none;
+  font-family: 'Sedgwick Ave', cursive;
+  letter-spacing: 1px;
+  color: black;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.container .gameboard {
   width: 20vw;
   height: 35vh;
   display: -ms-grid;
@@ -46,7 +112,7 @@ header h4 {
   border-radius: 10%;
 }
 
-.cell {
+.container .gameboard .cell {
   background-color: rgba(80, 134, 155, 0.822);
   width: 100%;
   height: 100%;
@@ -84,5 +150,143 @@ header h4 {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1em;
+}
+
+.info .player-name {
+  font-family: 'Sedgwick Ave', cursive;
+  letter-spacing: 2px;
+  font-size: 2em;
+  text-align: center;
+  padding-bottom: 5%;
+}
+
+button {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: background 250ms ease-in-out, -webkit-transform 150ms ease;
+  transition: background 250ms ease-in-out, -webkit-transform 150ms ease;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  transition: background 250ms ease-in-out, transform 150ms ease, -webkit-transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+  background: #0053ba;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
+}
+
+input {
+  padding: 0.3rem 0.5rem;
+}
+
+footer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
+footer .right-bar {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2/4;
+  position: absolute;
+  right: 0;
+  height: 4.1%;
+  width: 66.66%;
+  color: white;
+  background-color: black;
+  bottom: 0;
+  border-radius: 10px 0 0 0;
+}
+
+.modal-bg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20%;
+  position: relative;
+  width: 45vw;
+  height: 30vh;
+  align-items: center;
+  padding: 2%;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 5%;
+  text-align: center;
+  color: white;
+}
+
+.close-modal {
+  color: white;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

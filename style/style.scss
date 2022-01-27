@@ -4,51 +4,87 @@
 }
 
 header {
+  display: grid;
+  grid: 4fr 1fr / repeat(3, 1fr);
   text-align: center;
-  margin-top: 2%;
   h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2/3;
     font-family: 'Merienda One', cursive;
+    overflow: visible;
+    white-space: nowrap;
     font-size: 64px;
+    letter-spacing: 0.1em;
   }
 
-  h4 {
-    font-family: 'Sedgwick Ave', cursive;
-    text-align: end;
-    font-size: 2em;
-    color: white;
-    background-color: black;
-    width: 53%;
-    padding-right: 15%;
+  .left-bar {
+    grid-row: 2/3;
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 0 10px 10px 0;
+
+    h4 {
+      grid-column: 2/3;
+      font-family: 'Sedgwick Ave', cursive;
+      font-size: 2em;
+      color: white;
+      width: 100%;
+      padding-top: 1%;
+    }
   }
+}
+
+.github {
+  grid-column: 3/4;
+  grid-row: 1/3;
+
+  img {
+    margin-top: 8%;
+  }
+}
+
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+  font-family: 'Sedgwick Ave', cursive;
+  letter-spacing: 1px;
+  color: black;
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5%;
-}
-
-.gameboard {
-  width: 20vw;
-  height: 35vh;
-
   display: grid;
-  grid: repeat(3, 1fr) / repeat(3, 1fr);
-  gap: 10px;
-  border-radius: 10%;
-}
-
-.cell {
-  background-color: rgba(80, 134, 155, 0.822);
-  width: 100%;
-  height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10%;
-  font-family: 'Sedgwick Ave', cursive;
-  font-size: 3em;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  .gameboard {
+    width: 20vw;
+    height: 35vh;
+
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 10px;
+    border-radius: 10%;
+
+    .cell {
+      background-color: rgba(80, 134, 155, 0.822);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10%;
+      font-family: 'Sedgwick Ave', cursive;
+      font-size: 3em;
+    }
+  }
 }
 
 .info {
@@ -62,4 +98,118 @@ header {
     flex-direction: column;
     gap: 1em;
   }
+  .player-name {
+    font-family: 'Sedgwick Ave', cursive;
+    letter-spacing: 2px;
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 5%;
+  }
+}
+
+button {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+  background: #0053ba;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+input {
+  padding: 0.3rem 0.5rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  .right-bar {
+    grid-column: 2/4;
+    position: absolute;
+    right: 0;
+    height: 4.1%;
+    width: 66.66%;
+    color: white;
+    background-color: black;
+    bottom: 0;
+    border-radius: 10px 0 0 0;
+  }
+}
+
+// Modal window.
+
+.modal-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20%;
+  position: relative;
+  width: 45vw;
+  height: 30vh;
+  align-items: center;
+  padding: 2%;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 5%;
+  text-align: center;
+  color: white;
+}
+
+.close-modal {
+  color: white;
+  grid-row: 1/2;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
 }
