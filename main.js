@@ -1,14 +1,15 @@
 'use strict';
 
-const playerFactory = function (name, symbol) {
+const playerFactory = function (name, symbol, CSSclass) {
   return {
     name,
     symbol,
+    CSSclass,
   };
 };
 
-const player1 = new playerFactory('Player 1', 'X');
-const player2 = new playerFactory('Player 2', 'O');
+const player1 = new playerFactory('Player 1', 'X', 'player-x');
+const player2 = new playerFactory('Player 2', 'O', 'player-o');
 
 const DisplayController = (function () {
   function _reassignPlayerName() {
@@ -93,8 +94,8 @@ const Gameboard = (function () {
         _winner = undefined;
         _cells.forEach((cell) => {
           cell.textContent = '';
+          cell.classList.remove(player1.CSSclass && player2.CSSclass);
         });
-        // DisplayController.displayModal();
       });
     });
   }
@@ -116,6 +117,9 @@ const Gameboard = (function () {
           if (cell.textContent === '' && _turnCount < 10) {
             let cellIdx = +e.target.dataset.cell;
             cell.textContent = _checkTurn();
+            cell.textContent === 'X'
+              ? cell.classList.add(player1.CSSclass)
+              : cell.classList.add(player2.CSSclass);
             _boardArr.splice(cellIdx, 1, cell.textContent);
           }
         }
