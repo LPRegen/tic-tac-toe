@@ -1,6 +1,18 @@
+// Variables.
+$primaryColor: #a54f11;
+$secondaryColor: #d37430;
+$cellColor: #a97d73;
+$backgroundColor: #402e32;
+$colorX: #4c8077;
+$colorO: #a73b43;
+
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: $backgroundColor;
 }
 
 header {
@@ -17,6 +29,7 @@ header {
     white-space: nowrap;
     font-size: 64px;
     letter-spacing: 0.1em;
+    color: $primaryColor;
   }
 
   .left-bar {
@@ -31,7 +44,7 @@ header {
       grid-column: 2/3;
       font-family: 'Sedgwick Ave', cursive;
       font-size: 2em;
-      color: white;
+      color: $secondaryColor;
       width: 100%;
       padding-top: 1%;
     }
@@ -55,7 +68,7 @@ a {
   text-decoration: none;
   font-family: 'Sedgwick Ave', cursive;
   letter-spacing: 1px;
-  color: black;
+  color: white;
 }
 
 .container {
@@ -74,7 +87,7 @@ a {
     border-radius: 10%;
 
     .cell {
-      background-color: rgba(80, 134, 155, 0.822);
+      background-color: $cellColor;
       width: 100%;
       height: 100%;
       display: flex;
@@ -83,6 +96,14 @@ a {
       border-radius: 10%;
       font-family: 'Sedgwick Ave', cursive;
       font-size: 3em;
+    }
+
+    .player-x {
+      color: $colorX;
+    }
+
+    .player-o {
+      color: $colorO;
     }
   }
 }
@@ -104,6 +125,7 @@ a {
     font-size: 2em;
     text-align: center;
     padding-bottom: 5%;
+    color: white;
   }
 }
 
@@ -113,7 +135,7 @@ button {
   padding: 0.5rem 1rem;
   margin: 0;
   text-decoration: none;
-  background: #0069ed;
+  background: $secondaryColor;
   color: #ffffff;
   font-family: sans-serif;
   font-size: 1rem;
@@ -123,11 +145,12 @@ button {
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
+  border-radius: 10px;
 }
 
 button:hover,
 button:focus {
-  background: #0053ba;
+  background: $secondaryColor;
 }
 
 button:focus {
@@ -153,7 +176,6 @@ footer {
     right: 0;
     height: 4.1%;
     width: 66.66%;
-    color: white;
     background-color: black;
     bottom: 0;
     border-radius: 10px 0 0 0;
@@ -194,6 +216,16 @@ footer {
   padding: 2%;
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
+}
+
+input {
+  border-radius: 10px;
+  border-style: none;
+  text-align: center;
+}
+
+input[type='text']:focus {
+  border-bottom: 3px solid black;
 }
 
 h2 {
