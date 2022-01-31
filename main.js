@@ -12,6 +12,8 @@ const player1 = new playerFactory('Player 1', 'X', 'player-x');
 const player2 = new playerFactory('Player 2', 'O', 'player-o');
 
 const DisplayController = (function () {
+  let _cells = Array.from(document.querySelectorAll('.cell'));
+
   function _reassignPlayerName() {
     const submitNameBtns = document.querySelectorAll('.submit-name');
 
@@ -33,20 +35,20 @@ const DisplayController = (function () {
     });
   }
 
-  function _toggleClassOnModal() {
+  function toggleClassOnModal() {
     let modalBackground = document.querySelector('.modal-bg');
     modalBackground.classList.toggle('modal-active');
   }
 
   function displayModal(winner) {
     if (winner) {
-      _toggleClassOnModal();
+      toggleClassOnModal();
     }
     if (winner === null) {
-      _toggleClassOnModal();
+      toggleClassOnModal();
     }
     if (winner === false) {
-      _toggleClassOnModal();
+      toggleClassOnModal();
     }
 
     _updateDisplayedWinner(winner);
@@ -57,29 +59,39 @@ const DisplayController = (function () {
     if (winner) {
       modalMessage.textContent = `${winner} won the game!`;
     } else {
-      modalMessage.textContent = "It's a tie!";
+      modalMessage.textContent = "It's a draw!";
     }
   }
 
   function _closeModal() {
     let closeBtn = document.querySelector('.close-modal');
 
-    closeBtn.addEventListener('click', function (e) {
-      _toggleClassOnModal();
+    closeBtn.addEventListener('click', function () {
+      toggleClassOnModal();
     });
+  }
+
+  function clearCells() {
+    _cells.forEach((cell) => {
+      cell.textContent = '';
+      cell.classList.remove(player1.CSSclass);
+      cell.classList.remove(player2.CSSclass);
+    });
+    return _cells;
   }
 
   _reassignPlayerName();
   _closeModal();
 
   return {
+    toggleClassOnModal,
     displayModal,
+    clearCells,
   };
 })();
 
 const Gameboard = (function () {
   let _boardArr = new Array(9).fill('');
-  let _cells = Array.from(document.querySelectorAll('.cell'));
   let _turnCount = 1;
   let _winner = undefined;
 
@@ -88,14 +100,16 @@ const Gameboard = (function () {
 
     restartBtn.forEach((restartBtn) => {
       restartBtn.addEventListener('click', function () {
-        DisplayController.displayModal(_winner);
+        if (_winner && _winner === null) {
+          DisplayController.displayModal(_winner);
+        }
+        if (_winner) {
+          DisplayController.toggleClassOnModal();
+        }
+        DisplayController.clearCells();
         _boardArr.fill('');
         _turnCount = 1;
         _winner = undefined;
-        _cells.forEach((cell) => {
-          cell.textContent = '';
-          cell.classList.remove(player1.CSSclass && player2.CSSclass);
-        });
       });
     });
   }
@@ -111,7 +125,7 @@ const Gameboard = (function () {
   }
 
   function _addSymbol() {
-    _cells.forEach((cell) => {
+    DisplayController.clearCells().forEach((cell) => {
       cell.addEventListener('click', function (e) {
         if (!_winner) {
           if (cell.textContent === '' && _turnCount < 10) {
@@ -124,14 +138,14 @@ const Gameboard = (function () {
           }
         }
 
-        _checkWinOrTie();
+        _checkWinOrDraw();
       });
     });
   }
 
-  function _checkWinOrTie() {
+  function _checkWinOrDraw() {
     if (_turnCount > 5) {
-      const winningConditions = [
+      const winningPossibilities = [
         [0, 1, 2],
         [3, 4, 5],
         [6, 7, 8],
@@ -143,19 +157,23 @@ const Gameboard = (function () {
       ];
 
       for (let i = 0; i <= 7; i++) {
-        let winCondition = winningConditions[i];
-        let optA = _boardArr[winCondition[0]];
-        let optB = _boardArr[winCondition[1]];
-        let optC = _boardArr[winCondition[2]];
-        if (optA + optB + optC === 'XXX') {
+        let winCondition = winningPossibilities[i];
+
+        let firstPosition = _boardArr[winCondition[0]];
+        let secondPosition = _boardArr[winCondition[1]];
+        let thirdPosition = _boardArr[winCondition[2]];
+
+        if (firstPosition + secondPosition + thirdPosition === 'XXX') {
           _winner = player1.name;
         }
-        if (optA + optB + optC === 'OOO') {
+
+        if (firstPosition + secondPosition + thirdPosition === 'OOO') {
           _winner = player2.name;
         }
       }
     }
-    if (_turnCount === 9) {
+
+    if (_turnCount > 9) {
       _winner = null;
     }
 
@@ -165,3 +183,8 @@ const Gameboard = (function () {
   _restartGame();
   _addSymbol();
 })();
+
+//// Bug, when it's a draw or some player won the game
+//// if the modal is closed,
+// ! Add method to update player's turn.
+// ! Create method to avoid doing DOM manipulation on Gameboard.
