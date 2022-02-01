@@ -35,20 +35,28 @@ const DisplayController = (function () {
     });
   }
 
-  function toggleClassOnModal() {
+  function toggleClassAndDataModal() {
     let modalBackground = document.querySelector('.modal-bg');
-    modalBackground.classList.toggle('modal-active');
+    modalBackground.dataset.displayed = 'true';
+    if (!modalBackground.dataset.displayModal) {
+      modalBackground.classList.toggle('modal-active');
+    }
+
+    return { modalBackground };
   }
 
   function displayModal(winner) {
     if (winner) {
-      toggleClassOnModal();
+      toggleClassAndDataModal();
     }
-    if (winner === null) {
-      toggleClassOnModal();
+    if (
+      winner === null &&
+      !toggleClassAndDataModal().modalBackground.dataset.displayed
+    ) {
+      toggleClassAndDataModal();
     }
     if (winner === false) {
-      toggleClassOnModal();
+      toggleClassAndDataModal();
     }
 
     _updateDisplayedWinner(winner);
@@ -67,7 +75,7 @@ const DisplayController = (function () {
     let closeBtn = document.querySelector('.close-modal');
 
     closeBtn.addEventListener('click', function () {
-      toggleClassOnModal();
+      toggleClassAndDataModal();
     });
   }
 
@@ -84,7 +92,6 @@ const DisplayController = (function () {
   _closeModal();
 
   return {
-    toggleClassOnModal,
     displayModal,
     clearCells,
   };
@@ -102,9 +109,6 @@ const Gameboard = (function () {
       restartBtn.addEventListener('click', function () {
         if (_winner && _winner === null) {
           DisplayController.displayModal(_winner);
-        }
-        if (_winner) {
-          DisplayController.toggleClassOnModal();
         }
         DisplayController.clearCells();
         _boardArr.fill('');
@@ -173,7 +177,7 @@ const Gameboard = (function () {
       }
     }
 
-    if (_turnCount > 9) {
+    if (_turnCount === 10) {
       _winner = null;
     }
 
