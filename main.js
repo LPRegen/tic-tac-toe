@@ -76,12 +76,19 @@ const DisplayController = (function () {
     return _cells;
   }
 
+  function updatePlayerTurn(playerName) {
+    let playerTurn = document.querySelector('.player-turn');
+    playerTurn.textContent = `${playerName}'s turn!`;
+    return playerTurn;
+  }
+
   _reassignPlayerName();
   _closeModal();
 
   return {
     displayModalWindow,
     clearCells,
+    updatePlayerTurn,
   };
 })();
 
@@ -97,6 +104,7 @@ const Gameboard = (function () {
       restartBtn.addEventListener('click', function () {
         DisplayController.displayModalWindow(_winner);
         DisplayController.clearCells();
+        DisplayController.updatePlayerTurn().textContent = `${player1.name}'s turn!`;
 
         _boardArr.fill('');
         _turnCount = 1;
@@ -113,9 +121,11 @@ const Gameboard = (function () {
   function _checkTurn() {
     if (_turnCount % 2 === 1) {
       _turnCount++;
+      DisplayController.updatePlayerTurn(player2.name);
       return player1.symbol;
     } else {
       _turnCount++;
+      DisplayController.updatePlayerTurn(player1.name);
       return player2.symbol;
     }
   }
