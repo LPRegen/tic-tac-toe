@@ -35,31 +35,19 @@ const DisplayController = (function () {
     });
   }
 
-  function toggleClassAndDataModal() {
+  function toggleClassAndDataModal(winner) {
     let modalBackground = document.querySelector('.modal-bg');
-    modalBackground.dataset.displayed = 'true';
-    if (!modalBackground.dataset.displayModal) {
-      modalBackground.classList.toggle('modal-active');
-    }
+    if (winner !== undefined) {
+      if (modalBackground.dataset.displayed === 'true') {
+        delete modalBackground.dataset.displayed;
+      } else {
+        modalBackground.dataset.displayed = 'true';
+        modalBackground.classList.add('modal-active');
+      }
 
-    return { modalBackground };
-  }
-
-  function displayModal(winner) {
-    if (winner) {
-      toggleClassAndDataModal();
+      _updateDisplayedWinner(winner);
     }
-    if (
-      winner === null &&
-      !toggleClassAndDataModal().modalBackground.dataset.displayed
-    ) {
-      toggleClassAndDataModal();
-    }
-    if (winner === false) {
-      toggleClassAndDataModal();
-    }
-
-    _updateDisplayedWinner(winner);
+    return modalBackground;
   }
 
   function _updateDisplayedWinner(winner) {
@@ -75,7 +63,7 @@ const DisplayController = (function () {
     let closeBtn = document.querySelector('.close-modal');
 
     closeBtn.addEventListener('click', function () {
-      toggleClassAndDataModal();
+      toggleClassAndDataModal().classList.remove('modal-active');
     });
   }
 
@@ -92,7 +80,7 @@ const DisplayController = (function () {
   _closeModal();
 
   return {
-    displayModal,
+    toggleClassAndDataModal,
     clearCells,
   };
 })();
@@ -107,13 +95,17 @@ const Gameboard = (function () {
 
     restartBtn.forEach((restartBtn) => {
       restartBtn.addEventListener('click', function () {
-        if (_winner && _winner === null) {
-          DisplayController.displayModal(_winner);
-        }
+        DisplayController.toggleClassAndDataModal(_winner);
         DisplayController.clearCells();
+
         _boardArr.fill('');
         _turnCount = 1;
         _winner = undefined;
+        if (restartBtn.textContent === 'Play again!') {
+          DisplayController.toggleClassAndDataModal().classList.remove(
+            'modal-active'
+          );
+        }
       });
     });
   }
@@ -181,14 +173,9 @@ const Gameboard = (function () {
       _winner = null;
     }
 
-    return DisplayController.displayModal(_winner);
+    return DisplayController.toggleClassAndDataModal(_winner);
   }
 
   _restartGame();
   _addSymbol();
 })();
-
-//// Bug, when it's a draw or some player won the game
-//// if the modal is closed,
-// ! Add method to update player's turn.
-// ! Create method to avoid doing DOM manipulation on Gameboard.
