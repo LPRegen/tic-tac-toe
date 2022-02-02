@@ -35,7 +35,7 @@ const DisplayController = (function () {
     });
   }
 
-  function toggleClassAndDataModal(winner) {
+  function displayModalWindow(winner) {
     let modalBackground = document.querySelector('.modal-bg');
     if (winner !== undefined) {
       if (modalBackground.dataset.displayed === 'true') {
@@ -63,7 +63,7 @@ const DisplayController = (function () {
     let closeBtn = document.querySelector('.close-modal');
 
     closeBtn.addEventListener('click', function () {
-      toggleClassAndDataModal().classList.remove('modal-active');
+      displayModalWindow().classList.remove('modal-active');
     });
   }
 
@@ -80,7 +80,7 @@ const DisplayController = (function () {
   _closeModal();
 
   return {
-    toggleClassAndDataModal,
+    displayModalWindow,
     clearCells,
   };
 })();
@@ -95,14 +95,14 @@ const Gameboard = (function () {
 
     restartBtn.forEach((restartBtn) => {
       restartBtn.addEventListener('click', function () {
-        DisplayController.toggleClassAndDataModal(_winner);
+        DisplayController.displayModalWindow(_winner);
         DisplayController.clearCells();
 
         _boardArr.fill('');
         _turnCount = 1;
         _winner = undefined;
         if (restartBtn.textContent === 'Play again!') {
-          DisplayController.toggleClassAndDataModal().classList.remove(
+          DisplayController.displayModalWindow().classList.remove(
             'modal-active'
           );
         }
@@ -173,7 +173,7 @@ const Gameboard = (function () {
       _winner = null;
     }
 
-    return DisplayController.toggleClassAndDataModal(_winner);
+    return DisplayController.displayModalWindow(_winner);
   }
 
   _restartGame();
