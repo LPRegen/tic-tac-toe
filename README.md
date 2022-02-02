@@ -18,11 +18,11 @@
     <br />
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://lpregen.github.io/tic-tac-toe/">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/LPRegen/tic-tac-toe/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/LPRegen/tic-tac-toe/issues">Request Feature</a>
     <br />
     <br />
     <br />
@@ -57,7 +57,7 @@
 
   <br />
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/LPRegen/tic-tac-toe/blob/main/images/tic-tac-toe.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -83,7 +83,7 @@
 
 ## Contact
 
-Manuel Escribano - [@twitterComingSoon](https://twitter.com/coming-soon) - email@email_client.com
+Manuel Escribano - [@twitterComingSoon](https://twitter.com/coming-soon) - email@email.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
